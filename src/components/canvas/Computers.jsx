@@ -5,25 +5,26 @@ import { OrbitControls, Preload, useGLTF } from "@react-three/drei";
 import CanvasLoader from "../Loader";
 
 const Computers = ({ isMobile }) => {
-  const computer = useGLTF("./desktop_pc/scene.gltf");
+  const computer = useGLTF("./macbook_m1/scene.gltf");
 
   return (
     <mesh>
-      <hemisphereLight intensity={0.15} groundColor='black' />
+      <hemisphereLight intensity={0.35} groundColor='black'/>
+      <directionalLight position={[4, 5, 0]} intensity={0.75}/>
       <spotLight
         position={[-20, 50, 10]}
         angle={0.12}
         penumbra={1}
-        intensity={1}
+        intensity={.65}
         castShadow
         shadow-mapSize={1024}
       />
       <pointLight intensity={1} />
       <primitive
         object={computer.scene}
-        scale={isMobile ? 0.7 : 0.75}
-        position={isMobile ? [0, -3, -2.2] : [0, -3.75, -1.5]}
-        rotation={[-0.01, -0.2, -0.1]}
+        scale={isMobile ? 16 : 16.75}
+        position={isMobile ? [-0.5, -3.7, -0.75] : [1, -2.9, -2]}
+        rotation={[0.17, 0.75, 0.02]}
       />
     </mesh>
   );
@@ -33,7 +34,7 @@ const ComputersCanvas = () => {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    const mediaQuery = window.matchMedia('(max-width: 500px)');
+    const mediaQuery = window.matchMedia('(max-width: 750px)');
     setIsMobile(mediaQuery.matches);
 
     const handleMediaQueryChange = (event) => {
@@ -59,7 +60,7 @@ const ComputersCanvas = () => {
         <OrbitControls
           enableZoom={false}
           maxPolarAngle={Math.PI / 2}
-          minPolarAngle={Math.PI / 2}
+          minPolarAngle={Math.PI / 3}
         />
         <Computers isMobile={isMobile}/>
       </Suspense>
