@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { styles } from '../styles';
 import { services } from '../constants';
 import { fadeIn, textVariant } from '../utils/motion';
+import { SectionWrapper } from './hoc';
 
 const ServiceCard = ({ index, title, icon }) => {
   return (
@@ -41,9 +42,8 @@ const About = () => {
         variants={fadeIn("", "", 0.1, 1)}
         className="mt-4 text-secondary text-[17px] max-w-3xl leading-[30px]"
       >
-      I'm a seasoned web development using React, TypeScript, JavaScript, Tailwind and Three.js. I have extensive experience in building web applications and websites using modern web development technologies and frameworks.
+        I'm a seasoned developer with an arsenal of cutting-edge tools including React, TypeScript, Node.js, Tailwind, and Sass. I have a wealth of experience in crafting stunning web applications and websites using the latest and greatest in web development technologies and frameworks. Let me put my skills to work for you and bring your online presence to the next level!
       </motion.p>
-
       <div className="mt-20 flex flex-wrap gap-10">
         { services.map((service, index ) => (
           <ServiceCard key={service.title} index={index} {...service} />
@@ -53,4 +53,4 @@ const About = () => {
   )
 }
 
-export default About
+export default SectionWrapper(About, "about");
