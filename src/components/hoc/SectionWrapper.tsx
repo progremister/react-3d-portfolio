@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { motion } from 'framer-motion';
 
 import { styles } from '../../styles';
 import { staggerContainer } from '../../utils/motion';
 
-const SectionWrapper = ( Component, idName ) => 
+const SectionWrapper = ( Component :FC , idName: string ) => 
 function HOC() {
     return(
         <motion.section
