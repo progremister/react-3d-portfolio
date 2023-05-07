@@ -12,12 +12,14 @@ const Computers = ( {isMobile}: ComputersProps) => {
   return (
     <mesh>
       <hemisphereLight intensity={0.35} groundColor='black'/>
-      <directionalLight position={[-5, 5, 0]} intensity={0.6}/>
+      <directionalLight castShadow position={[-20, -25, -25]} shadow-mapSize={[1024, 1024]} intensity={0.25}>
+        <orthographicCamera attach="shadow-camera" args={[-10, 10, 10, -10]} />
+      </directionalLight>      
       <spotLight
         position={[-20, 50, 10]}
         angle={0.12}
         penumbra={1}
-        intensity={.65}
+        intensity={0.65}
         castShadow
         shadow-mapSize={1024}
       />
@@ -61,8 +63,8 @@ const ComputersCanvas = () => {
       <Suspense fallback={<CanvasLoader />}>
         <OrbitControls
           enableZoom={false}
-          maxPolarAngle={Math.PI / 2}
-          minPolarAngle={Math.PI / 2.5}
+          // maxPolarAngle={Math.PI / 2}
+          // minPolarAngle={Math.PI / 2.5}
         />
         <Computers isMobile={isMobile}/>
       </Suspense>
