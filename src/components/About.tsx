@@ -7,13 +7,13 @@ import { services } from '../constants';
 import { fadeIn, textVariant } from '../utils/motion';
 import { SectionWrapper } from './hoc';
 
-type Props = {
+type AboutProps = {
   index: number, 
   title: string,
   icon: string
 }
 
-const ServiceCard = ({ index, title, icon }: Props) => {
+const ServiceCard = ({ index, title, icon }: AboutProps) => {
   return (
     <Tilt 
       className="xs:w-[250px] w-full"

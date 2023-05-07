@@ -4,9 +4,9 @@ import { OrbitControls, Preload, useGLTF } from "@react-three/drei";
 
 import CanvasLoader from "../Loader";
 
-type Props = { isMobile: boolean }
+type ComputersProps = { isMobile: boolean }
 
-const Computers = ( {isMobile}: Props) => {
+const Computers = ( {isMobile}: ComputersProps) => {
   const computer = useGLTF("./macbook_m1/scene.gltf");
 
   return (
