@@ -19,7 +19,7 @@ const ExperienceCard = ({ experience }: ExperienceProps) => {
       iconStyle={{ background: experience.iconBg}}
       icon={ experience.icon !== "" ?
         <div className="flex justify-center items-center w-full h-full">
-          <img src={experience.icon} alt={experience.company_name} className="w-[70%] h-[0%] object-contain"/>
+          <img src={experience.icon} alt={experience.company_name} className="w-[70%] h-[70%] object-contain"/>
         </div> : ""
       }
     >
