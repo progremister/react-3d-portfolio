@@ -1,12 +1,10 @@
-import React, { Suspense, useState, useEffect} from "react";
+import React, { Suspense, useState, useEffect, ReactComponentElement} from "react";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Preload, useGLTF } from "@react-three/drei";
 
 import CanvasLoader from "../Loader";
 
-type Props = {
-  isMobile: boolean
-}
+type Props = { isMobile: boolean }
 
 const Computers = ( {isMobile}: Props) => {
   const computer = useGLTF("./macbook_m1/scene.gltf");
