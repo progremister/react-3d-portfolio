@@ -6,7 +6,7 @@ import { styles } from '../styles';
 import { EarthCanvas } from './canvas';
 import { SectionWrapper } from './hoc';
 import { slideIn } from '../utils/motion';
-import { MutableRefObject } from 'react';
+import { log } from 'console';
 
 const Contact = () => {
   const formRef: any = useRef();
@@ -17,9 +17,40 @@ const Contact = () => {
   });
   const [loading, setLoading] = useState(false)
 
-  const handleChange = (e: any) => {}
+  const handleChange = (e: any) => {
+    const { name, value } = e.target;
+    setForm({ ...form, [name]: value})
+  }
 
-  const handleSubmit = (e: any) => {}
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+    setLoading(true);
+
+    emailjs.send(
+      'service_h47ak47',
+      'template_zy2fh47', 
+      {
+        from_name: form.name,
+        to_name: 'Dmytro',
+        from_email: form.email,
+        to_email: 'kolosovskyi.dmytro@gmail.com',
+        message: form.message
+      }, 
+      '1Lmuo44Dlt5Z2GxzZ')
+      .then(() => {
+        setLoading(false);
+        alert('I appreciate your opinion! I\'ll get you back as soon as possible.');
+        setForm({
+          name: '',
+          email: '',
+          message: ''
+        });
+      }, (error) => {
+        setLoading(false);
+        console.log(error);
+        alert("Oops! Something went wrong.");
+      });
+  }
 
   return (
     <div className="xl:ml-12 xl:flex-row flex-col-reverse flex gap-10 overflow-hidden">
@@ -32,15 +63,6 @@ const Contact = () => {
           ref={formRef}
           onSubmit={handleSubmit}
           className="mt-12 flex flex-col gap-8">
-          <label htmlFor="" className="flex flex-col">
-            <span className="text-white font-medium mb-4">Your Name</span>
-            <input type="text"
-              name="name"
-              value={form.name}
-              onChange={handleChange}
-              placeholder="What's your name?"
-              className="bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg outline-none border-none font-medium" />
-          </label>
           <label htmlFor="" className="flex flex-col">
             <span className="text-white font-medium mb-4">Your Name</span>
             <input type="text"
