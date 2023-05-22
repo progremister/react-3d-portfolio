@@ -1,4 +1,4 @@
-import { Suspense } from 'react';
+import { Suspense, lazy } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, Preload, useGLTF } from '@react-three/drei';
 
@@ -15,6 +15,8 @@ const Earth = () => {
       rotation-y={0}/>
   );
 }
+
+const LazyEarth = lazy(() => Promise.resolve({ default: Earth }));
 
 const EarthCanvas = () => {
   return(
@@ -34,7 +36,7 @@ const EarthCanvas = () => {
           enableZoom={false}
           maxPolarAngle={Math.PI / 2}
           minPolarAngle={Math.PI / 2}/>
-        <Earth />
+        <LazyEarth />
         <Preload all />
       </Suspense>
     </Canvas>

@@ -1,4 +1,4 @@
-import React, { ReactElement, Suspense } from 'react';
+import React, { ReactElement, Suspense, lazy } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { Decal, Float, OrbitControls, Preload, useTexture } from '@react-three/drei';
 
@@ -30,7 +30,9 @@ const Ball = (props: any ) => {
   );
 };
 
+const LazyBalls = lazy(() => Promise.resolve({ default: Ball }));
 type BallCanvasProps = {icon: ReactElement};
+
 
 const BallCanvas = ({icon}: BallCanvasProps) => {
   return (
@@ -41,7 +43,7 @@ const BallCanvas = ({icon}: BallCanvasProps) => {
     >
       <Suspense fallback={<CanvasLoader />}>
         <OrbitControls enableZoom={false} />
-        <Ball imgUrl={icon} />
+        <LazyBalls imgUrl={icon} />
       </Suspense>
 
       <Preload all />

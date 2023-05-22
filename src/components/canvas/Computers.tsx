@@ -1,4 +1,4 @@
-import React, { Suspense, useState, useEffect} from "react";
+import React, { Suspense, useState, useEffect, lazy} from "react";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Preload, useGLTF } from "@react-three/drei";
 
@@ -34,6 +34,8 @@ const Computers = ( {isMobile}: ComputersProps) => {
   );
 };
 
+const LazyComputers = lazy(() => Promise.resolve({ default: Computers }));
+
 const ComputersCanvas = () => {
   const [isMobile, setIsMobile] = useState(false);
 
@@ -41,7 +43,7 @@ const ComputersCanvas = () => {
     const mediaQuery = window.matchMedia('(max-width: 700px)');
     setIsMobile(mediaQuery.matches);
 
-    const handleMediaQueryChange = (event: any) => {
+    const handleMediaQueryChange = (event: MediaQueryListEvent) => {
       setIsMobile(event.matches);
     }
 
@@ -66,7 +68,7 @@ const ComputersCanvas = () => {
           // maxPolarAngle={Math.PI / 2}
           // minPolarAngle={Math.PI / 2.5}
         />
-        <Computers isMobile={isMobile}/>
+        <LazyComputers isMobile={isMobile}/>
       </Suspense>
 
       <Preload all />
