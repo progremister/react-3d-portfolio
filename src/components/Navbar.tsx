@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
 import { styles } from '../styles';
 import { navLinks } from '../constants';
@@ -44,12 +45,14 @@ const Navbar = () => {
             onClick={() => setToggle(!toggle)}
           />
 
-          <div
+          <motion.div
+            whileInView={{x: [200, 0]}}
+            transition={{ duration: 0.85, ease: 'easeOut'}}
             className={`${
               !toggle ? "hidden" : "flex"
-            } p-6 black-gradient absolute top-20 right-0 mx-4 my-2 min-w-[140px] z-10 rounded-xl`}
+            } p-6 bg-primary absolute top-10 right-0 mx-0 mt-[10px] min-w-[50%] z-10 rounded-xl min-h-[100vh] align-middle justify-center`}
           >
-            <ul className='list-none flex justify-end items-start flex-1 flex-col gap-4'>
+            <ul className='list-none flex justify-start items-start flex-col gap-4 mt-[45%]'>
               {navLinks.map((nav) => (
                 <li
                   key={nav.id}
@@ -65,7 +68,7 @@ const Navbar = () => {
                 </li>
               ))}
             </ul>
-          </div>
+          </motion.div>
         </div>
       </div>
     </nav>
