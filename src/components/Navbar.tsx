@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
@@ -9,6 +9,11 @@ import { logo, menu, close } from '../assets';
 const Navbar = () => {
     const [active, setActive] = useState("");
     const [toggle, setToggle] = useState(false);
+
+    useEffect(() => {
+      toggle && (document.body.style.overflow = 'hidden');
+      !toggle && (document.body.style.overflow = 'unset');
+   }, [toggle ]);
 
   return (
     <nav className={`${styles.paddingX} w-full flex items-center py-5 fixed top-0 z-20 bg-primary`} >
@@ -50,7 +55,7 @@ const Navbar = () => {
             transition={{ duration: 0.85, ease: 'easeOut'}}
             className={`${
               !toggle ? "hidden" : "flex"
-            } p-6 bg-primary absolute top-10 right-0 mx-0 mt-[10px] min-w-[50%] z-10 rounded-xl min-h-[100vh] align-middle justify-center`}
+            } p-6 bg-primary absolute top-10 right-0 mx-0 mt-[15px] min-w-[60%] z-10 rounded-xl min-h-[100vh] align-middle justify-center`}
           >
             <ul className='list-none flex justify-start items-start flex-col gap-4 mt-[45%]'>
               {navLinks.map((nav) => (
