@@ -1,4 +1,4 @@
-import React, { Suspense, lazy } from 'react';
+//import React, { Suspense, lazy } from 'react';
 import { motion } from "framer-motion";
 import { styles } from "../styles";
 

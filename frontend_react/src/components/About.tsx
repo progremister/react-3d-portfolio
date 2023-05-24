@@ -1,19 +1,23 @@
-import React from 'react';
+import {useEffect, useState} from 'react';
 import { Tilt } from 'react-tilt';
 import { motion } from 'framer-motion';
 
 import { styles } from '../styles';
-import { services } from '../constants';
 import { fadeIn, textVariant } from '../utils/motion';
 import { SectionWrapper } from './hoc';
+import { urlFor, client } from '../client';
 
-type AboutProps = {
-  index: number, 
+interface IAbout {
   title: string,
-  icon: string
+  imageUrl: string
 }
 
-const ServiceCard = ({ index, title, icon }: AboutProps) => {
+type AboutProps = {
+  index: number,
+  about: IAbout
+}
+
+const ServiceCard = ({ index, about }: AboutProps) => {
   return (
     <Tilt 
       className="xs:w-[250px] w-full"
@@ -28,8 +32,8 @@ const ServiceCard = ({ index, title, icon }: AboutProps) => {
         className="w-full green-pink-gradient p-[1px] rounded-[20px] shadow-card"
       >
         <div className="bg-tertiary rounded-[20px] py-5 px-12 min-h-[280-px] flex justify-evenly items-center flex-col">
-          <img src={icon} alt={title} className="w-16 h-16 object-contain"/>
-          <h3 className="text-white text-[20px] font-bold text-center">{title}</h3>
+          <img src={urlFor(about.imageUrl)} alt={about.title} className="w-16 h-16 object-contain"/>
+          <h3 className="text-white text-[20px] font-bold text-center">{about.title}</h3>
         </div>
       </motion.div>
     </Tilt>
@@ -37,6 +41,15 @@ const ServiceCard = ({ index, title, icon }: AboutProps) => {
 }
 
 const About = () => {
+  const [abouts, setAbouts] = useState<IAbout[]>([]);
+
+  useEffect(() => {
+    const query = '*[_type == "about"]';
+
+    client.fetch<IAbout[]>(query)
+      .then((data) => setAbouts(data));
+  }, []);
+
   return (
     <>
       <motion.div variants={textVariant()}>
@@ -51,8 +64,8 @@ const About = () => {
         I'm a seasoned developer with an arsenal of cutting-edge tools including React, TypeScript, Node.js, Tailwind, and Sass. I have a wealth of experience in crafting stunning web applications and websites using the latest and greatest in web development technologies and frameworks. Let me put my skills to work for you and bring your online presence to the next level!
       </motion.p>
       <div className="mt-20 flex flex-wrap gap-10 justify-center">
-        { services.map((service, index ) => (
-          <ServiceCard key={service.title} index={index} {...service} />
+        { abouts.map((about, index ) => (
+          <ServiceCard key={about.title + index} index={index} about={about} />
         ))}
       </div>    
     </>

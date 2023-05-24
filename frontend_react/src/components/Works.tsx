@@ -1,16 +1,33 @@
-import React from 'react';
+import { useState, useEffect} from 'react';
 import { Tilt } from 'react-tilt';
 import { motion } from 'framer-motion';
 
 import { styles } from '../styles';
 import { github, eye } from '../assets'; 
 import { SectionWrapper } from './hoc';
-import { projects, IProjectCard } from '../constants';
 import { fadeIn, textVariant } from '../utils/motion';
+import { client, urlFor } from '../client';
 
-const ProjectCard = (project: IProjectCard) => {
+interface IProject {
+  name: string,
+  description: string, 
+  tags: {
+    name: string,
+    color: string
+  }[],
+  image: string,
+  website_link: string,
+  source_code_link: string
+}
+
+type ProjectsProps = {
+  index: number,
+  project: IProject
+}
+
+const ProjectCard = ({ index, project}: ProjectsProps) => {
   return(
-    <motion.div variants={fadeIn("up", "spring", project.index * 0.5, 0.75)}>
+    <motion.div variants={fadeIn("up", "spring", index * 0.5, 0.75)}>
       <Tilt
         option={{
           max: 45, 
@@ -21,7 +38,7 @@ const ProjectCard = (project: IProjectCard) => {
       >
         <div className='relative w-full h-[230px]'>
           <img
-            src={project.image}
+            src={urlFor(project.image)}
             alt='project_image'
             className='w-full h-full object-cover rounded-2xl'
           />
@@ -56,6 +73,16 @@ const ProjectCard = (project: IProjectCard) => {
 }
 
 const Works = () => {
+  const [projects, setProjects] = useState<IProject[]>([]);
+
+  useEffect(() => {
+    const query = '*[_type == "projects"]';
+
+    client.fetch<IProject[]>(query)
+      .then((data) => setProjects(data));
+  }, [])
+  
+
   return (
     <>
       <motion.div variants={textVariant()}>
@@ -75,7 +102,8 @@ const Works = () => {
         {projects.map((project, index) => (
           <ProjectCard 
             key={`project-${index}`}
-            {...project} 
+            index={index} 
+            project={project}
           />
         ))}
       </div>

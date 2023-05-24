@@ -13,16 +13,21 @@
     "@emailjs/browser": "^3.11.0",
     "@react-three/drei": "^9.66.1",
     "@react-three/fiber": "^8.13.0",
+    "@sanity/client": "^6.1.2",
+    "@sanity/image-url": "^1.0.2",
     "@types/jest": "^29.5.1",
     "@types/node": "^20.1.0",
     "framer-motion": "^10.12.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.11.0",
+    "react-scripts": "^5.0.1",
     "react-tilt": "^1.0.2",
+    "react-tooltip": "^5.13.1",
     "react-vertical-timeline-component": "^3.6.0",
     "three": "^0.152.2",
-    "typescript": "^5.0.4"
+    "typescript": "^5.0.4",
+    "web-vitals": "^2.1.4"
   },
   "devDependencies": {
     "@types/react": "^18.2.5",
