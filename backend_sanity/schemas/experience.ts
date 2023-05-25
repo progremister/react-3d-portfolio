@@ -35,13 +35,7 @@ export default {
             name: 'points',
             title: 'Points',
             type: 'array',
-            of:[
-                {
-                    name: 'description',
-                    title: 'Point Description',
-                    type: 'string'
-                }
-            ]
+            of:[{ type: 'points'}]
         }
     ]
 }
