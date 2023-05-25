@@ -44,7 +44,7 @@ const About = () => {
   const [abouts, setAbouts] = useState<IAbout[]>([]);
 
   useEffect(() => {
-    const query = '*[_type == "about"]';
+    const query = '*[_type == "abouts"]';
 
     client.fetch<IAbout[]>(query)
       .then((data) => setAbouts(data));
