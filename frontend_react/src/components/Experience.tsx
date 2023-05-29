@@ -13,7 +13,8 @@ interface IExperience {
   company_name: string,
   icon?: string,
   icon_bg: string,
-  date: string,
+  startDate: string,
+  endDate: string,
   points: {
     description: string
   }[];
@@ -22,11 +23,15 @@ interface IExperience {
 type ExperienceProps = { experience: IExperience}
 
 const ExperienceCard = ({ experience }: ExperienceProps) => {
+
+  const startDateString = new Date(experience.startDate).toLocaleString('en-US', { month: 'short', year: 'numeric' }),
+        endDateString = new Date(experience.endDate).toLocaleString('en-US', { month: 'short', year: 'numeric' });
+
   return (
     <VerticalTimelineElement
       contentStyle={{ background: "#1d1836", color: "#fff" }}
       contentArrowStyle={{ borderRight: "7px solid #232631" }}
-      date={experience.date}
+      date={`${startDateString} - ${experience.endDate ? endDateString : 'Present' }`}
       iconStyle={{ background: experience.icon_bg }}
       icon={
         experience.icon ? ( 
@@ -79,7 +84,8 @@ const Experience = () => {
 
       <div className="mt-20 flex flex-col">
         <VerticalTimeline>
-          {experiences.map((experience, index) => (
+          {experiences.sort((a, b) => new Date(b.endDate).getTime() - new Date(a.endDate).getTime())
+                      .map((experience, index) => (
             <ExperienceCard key={index} experience={experience} />
           ))}
         </VerticalTimeline>
