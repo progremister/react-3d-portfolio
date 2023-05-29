@@ -27,9 +27,22 @@ export default {
             type: 'string'
         },
         {
-            name: 'date',
-            title: 'Date',
-            type: 'string'
+            name: 'startDate',
+            title: 'Start Date',
+            type: 'date',
+            options: {
+                dateFormat: 'YYYY-MM',
+                calendarTodayLabel: 'Present'
+            }
+        },
+        {
+            name: 'endDate',
+            title: 'End Date',
+            type: 'date',
+            options: {
+                dateFormat: 'YYYY-MM',
+                calendarTodayLabel: 'Present'
+            }
         },
         {
             name: 'points',
