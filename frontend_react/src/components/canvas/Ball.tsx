@@ -30,9 +30,7 @@ const Ball = (props: any ) => {
   );
 };
 
-//const LazyBalls = lazy(() => Promise.resolve({ default: Ball }));
 type BallCanvasProps = {icon: ReactElement};
-
 
 const BallCanvas = ({icon}: BallCanvasProps) => {
   return (
